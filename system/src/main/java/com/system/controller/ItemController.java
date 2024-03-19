@@ -26,8 +26,8 @@ public class ItemController {
     private final IItemService itemService;
 
     @Operation(summary = "统计特定商品", description = "返回商品总价，库存数量和商品信息")
-    @GetMapping("/find")
-    public R<ItemDTO> find(@RequestParam Long productId) {
+    @GetMapping("/find/{productId}")
+    public R<ItemDTO> find(@PathVariable Long productId) {
         try {
             ItemDTO itemDTO = itemService.find(productId);
             return R.ok(itemDTO);

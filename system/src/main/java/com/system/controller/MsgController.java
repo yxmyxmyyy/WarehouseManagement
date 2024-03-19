@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/msg")
@@ -35,8 +37,8 @@ public class MsgController {
     }
 
     @Operation(summary = "读取选定消息", description = "读取消息，并改变状态")
-    @GetMapping("/read")
-    public R<Msg> read(@RequestParam Long id) {
+    @GetMapping("/read/{id}")
+    public R<Msg> read(@PathVariable Long id) {
         try {
             Msg msg = new Msg();
             msg.setId(id);

@@ -21,6 +21,7 @@ import java.util.Date;
 public class Ledger implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(type = IdType.ASSIGN_ID)
+    @Schema(hidden = true)
     private Long id;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long productId;

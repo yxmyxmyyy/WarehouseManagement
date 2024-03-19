@@ -52,8 +52,8 @@ public class ProductController {
 
     //删除一个
     @Operation(summary = "删除产品", description = "根据产品ID删除单个产品")
-    @DeleteMapping("/delete")
-    public R<String> deleteOne(@RequestParam Serializable id) {
+    @DeleteMapping("/delete/{id}")
+    public R<String> deleteOne(@PathVariable Long id) {
         try {
             ProductService.removeById(id);
             return R.ok("删除成功");
