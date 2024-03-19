@@ -11,26 +11,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("ledgers")
-public class Ledger implements Serializable {
+@TableName("msgs")
+public class Msg implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long productId;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long storeId;
-    private Integer quantity;
+    private String text;
+    private Integer status;
     @Schema(hidden = true)
-    private String type;
-    @Schema(hidden = true)
-    private Date createdTime;
+    private Date outboundTime;
 }
 
 

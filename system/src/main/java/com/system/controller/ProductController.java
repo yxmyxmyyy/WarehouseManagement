@@ -49,8 +49,9 @@ public class ProductController {
         }
     }
 
-    @Operation(summary = "删除产品", description = "根据产品ID删除单个产品")
+
     //删除一个
+    @Operation(summary = "删除产品", description = "根据产品ID删除单个产品")
     @DeleteMapping("/delete")
     public R<String> deleteOne(@RequestParam Serializable id) {
         try {

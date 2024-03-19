@@ -3,11 +3,13 @@ package com.system.controller;
 import com.api.domain.dto.LedgerDTO;
 import com.api.domain.po.Item;
 import com.api.domain.po.Ledger;
+import com.api.domain.po.Msg;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.domain.R;
 import com.common.exception.BadRequestException;
 import com.system.service.IItemService;
 import com.system.service.ILedgerService;
+import com.system.service.IMsgService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,8 @@ public class LedgerController {
     private final IItemService itemService;
 
     private final ILedgerService ledgerService;
+
+    private final IMsgService msgService;
 
     //入库
     @Operation(summary = "入库操作", description = "将指定数量的产品入库")
@@ -61,8 +65,12 @@ public class LedgerController {
             throw new BadRequestException(e.getMessage());
         }
         try {
+            Msg msg = new Msg();
+            msg.setStatus(0);
+            msg.setText("出库内容:"+ledger.getProductId()+","+"数量:"+ledger.getQuantity());
             ledger.setType("OUT");
             ledgerService.save(ledger);
+            msgService.save(msg);
             return R.ok(item);
         } catch (BadRequestException e) {
             throw new BadRequestException(e.getMessage());

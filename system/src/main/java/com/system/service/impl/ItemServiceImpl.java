@@ -65,14 +65,15 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     }
 
     public ItemDTO find(Long productId) {
-        // 从ProductService获取商品名称和价格
         Product productInfo = ProductService.getById(productId);
-        // 从ItemService获取库存总量
         Integer totalStock = itemMapper.findTotalStock(productId);
-        // 计算总价
-        BigDecimal totalPrice = productInfo.getPrice().multiply(new BigDecimal(totalStock));
+        BigDecimal totalPrice;
+        try {
+            totalPrice = productInfo.getPrice().multiply(new BigDecimal(totalStock));
+        } catch (Exception e) {
+            throw new BadRequestException("商品不存在");
+        }
 
-        // 构造并返回ItemDTO
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setProductId(productId);
         itemDTO.setProductName(productInfo.getName());
