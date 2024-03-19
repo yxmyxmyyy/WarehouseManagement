@@ -26,8 +26,7 @@ public class Ledger implements Serializable {
     private Long productId;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long storeId;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long quantity;
+    private Integer quantity;
     private String type;
     @Schema(hidden = true)
     private Date createdTime;

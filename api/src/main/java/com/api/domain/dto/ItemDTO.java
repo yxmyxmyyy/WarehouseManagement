@@ -1,4 +1,4 @@
-package com.api.domain.po;
+package com.api.domain.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -17,20 +17,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("items")
-public class Item implements Serializable {
-    @JsonSerialize(using = ToStringSerializer.class)
-    @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+public class ItemDTO implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long productId;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long storeId;
-    private Integer stock;
-    @Schema(hidden = true)
-    private Date createdTime;
-    @Schema(hidden = true)
-    private Date updatedTime;
+    private String productName;
+    private Integer totalStock;
+    private BigDecimal price;
+    private BigDecimal totalPrice;
 }
 
 
